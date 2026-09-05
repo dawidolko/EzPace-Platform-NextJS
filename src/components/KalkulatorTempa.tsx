@@ -1,13 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-
-const DYSTANSE = [
-  { nazwa: '5 km', km: 5 },
-  { nazwa: '10 km', km: 10 },
-  { nazwa: 'Półmaraton', km: 21.0975 },
-  { nazwa: 'Maraton', km: 42.195 },
-];
+import type { Tresc } from './tresc';
 
 /** Sekundy na "m:ss" albo "h:mm:ss", zaleznie od dlugosci. */
 function naCzas(sekundy: number, zGodzinami = false): string {
@@ -21,7 +15,8 @@ function naCzas(sekundy: number, zGodzinami = false): string {
   return `${m}:${String(sek).padStart(2, '0')}`;
 }
 
-export function KalkulatorTempa() {
+export function KalkulatorTempa({ t }: { t: Tresc }) {
+  const DYSTANSE = t.kalkulator.dystanse;
   const [dystans, setDystans] = useState(DYSTANSE[2]);
   const [godziny, setGodziny] = useState('2');
   const [minuty, setMinuty] = useState('00');
@@ -61,7 +56,7 @@ export function KalkulatorTempa() {
       >
         <fieldset>
           <legend className="font-display text-sm font-bold uppercase tracking-widest text-pine-600">
-            Dystans
+            {t.kalkulator.dystans}
           </legend>
           <div className="mt-3 grid grid-cols-2 gap-2">
             {DYSTANSE.map((d) => (
@@ -88,12 +83,12 @@ export function KalkulatorTempa() {
 
         <fieldset className="mt-6">
           <legend className="font-display text-sm font-bold uppercase tracking-widest text-pine-600">
-            Cel czasowy
+            {t.kalkulator.cel}
           </legend>
           <div className="mt-3 grid grid-cols-2 gap-3">
             <div>
               <label htmlFor="godziny" className="text-sm font-medium text-ink-700">
-                Godziny
+                {t.kalkulator.godziny}
               </label>
               <input
                 id="godziny"
@@ -108,7 +103,7 @@ export function KalkulatorTempa() {
             </div>
             <div>
               <label htmlFor="minuty" className="text-sm font-medium text-ink-700">
-                Minuty
+                {t.kalkulator.minuty}
               </label>
               <input
                 id="minuty"
@@ -125,7 +120,7 @@ export function KalkulatorTempa() {
         </fieldset>
 
         <p className="mt-5 text-sm text-ink-500">
-          Wynik przelicza się na bieżąco — nie ma przycisku do klikania.
+          {t.kalkulator.naZywo}
         </p>
       </form>
 
@@ -135,21 +130,21 @@ export function KalkulatorTempa() {
           <div className="rounded-xl border border-mist-200 p-6">
             <div className="flex flex-wrap items-baseline gap-x-8 gap-y-3 border-b border-mist-200 pb-5">
               <div>
-                <p className="text-xs uppercase tracking-wider text-ink-400">Tempo</p>
+                <p className="text-xs uppercase tracking-wider text-ink-400">{t.kalkulator.tempo}</p>
                 <p className="tabular font-display text-4xl font-extrabold text-pine-600">
                   {naCzas(wynik.tempoNaKm)}
                   <span className="ml-1 text-lg font-semibold text-ink-500">/km</span>
                 </p>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-wider text-ink-400">Prędkość</p>
+                <p className="text-xs uppercase tracking-wider text-ink-400">{t.kalkulator.predkosc}</p>
                 <p className="tabular font-display text-4xl font-extrabold text-ink-900">
                   {wynik.predkosc.toFixed(1)}
                   <span className="ml-1 text-lg font-semibold text-ink-500">km/h</span>
                 </p>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-wider text-ink-400">Cel</p>
+                <p className="text-xs uppercase tracking-wider text-ink-400">{t.kalkulator.celWynik}</p>
                 <p className="tabular font-display text-4xl font-extrabold text-ink-900">
                   {naCzas(wynik.razem, true)}
                 </p>
@@ -157,18 +152,19 @@ export function KalkulatorTempa() {
             </div>
 
             <h3 className="mt-5 font-display text-sm font-bold uppercase tracking-widest text-pine-600">
-              Międzyczasy
+              {t.kalkulator.miedzyczasy}
             </h3>
             <div className="mt-3 overflow-x-auto">
               <table className="w-full min-w-80 border-collapse text-sm">
                 <caption className="sr-only">
-                  Międzyczasy dla dystansu {dystans.nazwa} przy tempie{' '}
-                  {naCzas(wynik.tempoNaKm)} na kilometr
+                  {t.kalkulator.podpis
+                    .replace('{d}', dystans.nazwa)
+                    .replace('{t}', naCzas(wynik.tempoNaKm))}
                 </caption>
                 <thead>
                   <tr className="border-b border-mist-200 text-left text-ink-500">
-                    <th scope="col" className="py-2 font-semibold">Kilometr</th>
-                    <th scope="col" className="py-2 font-semibold">Czas</th>
+                    <th scope="col" className="py-2 font-semibold">{t.kalkulator.kilometr}</th>
+                    <th scope="col" className="py-2 font-semibold">{t.kalkulator.czas}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -188,7 +184,7 @@ export function KalkulatorTempa() {
           </div>
         ) : (
           <p className="rounded-xl border border-dashed border-mist-300 p-6 text-ink-500">
-            Podaj cel czasowy większy od zera, żeby zobaczyć tempo i międzyczasy.
+            {t.kalkulator.pusto}
           </p>
         )}
       </div>

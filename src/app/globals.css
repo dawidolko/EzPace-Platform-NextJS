@@ -1,0 +1,103 @@
+@import 'tailwindcss';
+
+/*
+ * EzPace — system designu.
+ *
+ * Charakter: poranek na trasie. Jasna, chlodna biel jako podstawa, glęboka
+ * zielen sosnowa jako kolor prowadzacy i cieplа glinka wylacznie do
+ * podkreslen. Swiadomie odwrotnie niz EzScout — tamten serwis jest nocny
+ * i bursztynowy, ten ma byc dzienny i spokojny.
+ */
+
+@theme {
+  --color-paper: #ffffff;
+  --color-mist-50: #f5f7f6;
+  --color-mist-100: #eaefec;
+  --color-mist-200: #d8e0db;
+  --color-mist-300: #b6c2bb;
+
+  --color-ink-900: #0f151b;
+  --color-ink-700: #2c3841;
+  --color-ink-500: #566470;
+  --color-ink-400: #75828d;
+
+  --color-pine-700: #0b4837;
+  --color-pine-600: #0f5d47;
+  --color-pine-500: #157a5d;
+  --color-pine-100: #ddefe7;
+
+  --color-clay-600: #b8552f;
+  --color-clay-500: #d1643a;
+  --color-clay-100: #fbe8e0;
+
+  --font-display: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink-900);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+:where(a, button, summary, input, textarea, select):focus-visible {
+  outline: 3px solid var(--color-pine-600);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 60;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-pine-600);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+/*
+ * Motyw sladu na trasie: delikatne, poziome pasy sugerujace kilometrowe
+ * znaczniki. Gradient, wiec zero zadan sieciowych.
+ */
+.trail {
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0 78px,
+    rgb(15 93 71 / 8%) 78px 80px
+  );
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}

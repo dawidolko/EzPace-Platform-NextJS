@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="EzPace">
+  <rect width="64" height="64" fill="#f3ebda"/>
+  <rect width="64" height="16" fill="#cc0055"/>
+  <rect x="10" y="25" width="44" height="7" fill="#17130f"/>
+  <rect x="10" y="38" width="32" height="7" fill="#17130f"/>
+  <rect x="10" y="51" width="20" height="7" fill="#17130f"/>
+</svg>

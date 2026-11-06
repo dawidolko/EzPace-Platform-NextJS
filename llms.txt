@@ -1,0 +1,12 @@
+# EzPace
+
+> EzPace is a demo running-coaching site by Dawid Olko: training plans counted back from a race date, a pace calculator with splits, and heart-rate zones. It is a static site in English and Polish.
+
+## Pages
+
+- [Home (English)](https://ezpace.dawidolko.pl/): plans, pace calculator, how the coaching works, results and FAQ
+- [Home (Polish)](https://ezpace.dawidolko.pl/pl/): the same page in Polish
+
+## Author
+
+- [Dawid Olko](https://dawidolko.pl): Fullstack / AI Developer who built this site

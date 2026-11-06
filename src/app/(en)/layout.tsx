@@ -68,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={fontVariables}>
       <head>
         <meta httpEquiv="Content-Security-Policy" content={CONTENT_SECURITY_POLICY} />
-        <script src="/a11y/a11y-panel.js" data-accent="#1d4ed8" defer></script>
+        <script src="/a11y/a11y-panel.js" data-accent="#cc0055" defer></script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(daneStrukturalne) }}

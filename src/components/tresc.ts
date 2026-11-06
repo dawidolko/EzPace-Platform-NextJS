@@ -1,6 +1,5 @@
 /*
- * Tresc serwisu w dwoch jezykach — patrz komentarz w blizniaczym EzScout.
- * Angielski jest domyslny (trasa `/`), polski pod `/pl`.
+ * Site copy in two languages. English is the default at `/`, Polish lives at `/pl/`.
  */
 
 export type Jezyk = 'en' | 'pl';
@@ -106,7 +105,7 @@ const EN: Tresc = {
     pytania: [
       { pytanie: 'Do I need a heart-rate watch?', odpowiedz: 'No. Without one we run the training by pace and perceived effort — the zones take longer to tune, but the plan works the same.' },
       { pytanie: 'What if I miss a week?', odpowiedz: 'Write to me and the next week gets rewritten. The plan is not a checklist; it is a proposal that has to fit your calendar.' },
-      { pytanie: 'Does the plan include a diet?', odpowiedz: 'In the Marathon package — a fuelling strategy for the race itself and for long runs. We do not write full meal plans; that is a dietitian&rsquo;s job.' },
+      { pytanie: 'Does the plan include a diet?', odpowiedz: 'In the Marathon package — a fuelling strategy for the race itself and for long runs. We do not write full meal plans; that is a dietitian’s job.' },
       { pytanie: 'How does contact with the coach work?', odpowiedz: 'Messages on working days, answered within 24 hours. The Marathon package adds a call every two weeks.' },
       { pytanie: 'Can I stop partway through?', odpowiedz: 'Yes. We refund the proportional share for the unused weeks, no questions asked.' },
     ],

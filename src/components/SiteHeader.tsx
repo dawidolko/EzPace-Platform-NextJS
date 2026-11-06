@@ -7,16 +7,16 @@ export function SiteHeader({ t }: { t: Tresc }) {
   const [otwarte, setOtwarte] = useState(false);
 
   /*
-   * Escape zamyka menu na telefonie. Bez tego jedynym wyjsciem jest trafienie
-   * w przycisk — a osoba poruszajaca sie klawiatura nie ma jak sie wycofac.
+   * Escape closes the phone menu, so a keyboard user can back out without
+   * travelling to the toggle button.
    */
   useEffect(() => {
     if (!otwarte) return;
-    const naKlawisz = (e: KeyboardEvent) => {
+    const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setOtwarte(false);
     };
-    document.addEventListener('keydown', naKlawisz);
-    return () => document.removeEventListener('keydown', naKlawisz);
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
   }, [otwarte]);
 
   const linki = [
@@ -26,65 +26,52 @@ export function SiteHeader({ t }: { t: Tresc }) {
     { href: '#faq', label: t.nav.faq },
   ];
 
+  /*
+   * A plain link to the other route: it works without JavaScript and each
+   * language is indexed on its own.
+   */
+  const jezyk = (
+    <a
+      href={t.jezyk.drugiHref}
+      hrefLang={t.jezyk.drugiLang}
+      lang={t.jezyk.drugiLang}
+      aria-label={`${t.jezyk.drugi}: ${t.jezyk.etykieta}`}
+      className="masthead__cell"
+    >
+      {t.jezyk.drugi}
+    </a>
+  );
+
   return (
-    <header className="sticky top-0 z-50 border-b border-mist-200 bg-paper/90 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <a href={t.sciezka} className="flex items-center gap-2.5">
-          <span
-            aria-hidden="true"
-            className="grid size-9 place-items-center rounded-md bg-pine-600 font-display text-xl font-bold text-white"
-          >
-            EZ
-          </span>
-          <span className="font-display text-2xl font-extrabold tracking-tight text-ink-900">EzPace</span>
+    <header className="masthead">
+      <div className="masthead__row">
+        <a href={t.sciezka} className="wordmark">
+          EzPace
         </a>
 
-        <nav aria-label={t.menu.etykieta} className="hidden md:block">
-          <ul className="flex items-center gap-7">
+        <nav aria-label={t.menu.etykieta} className="masthead__nav">
+          <ul>
             {linki.map((l) => (
               <li key={l.href}>
-                <a href={l.href} className="text-sm font-semibold text-ink-500 transition hover:text-pine-600">
+                <a href={l.href} className="masthead__cell">
                   {l.label}
                 </a>
               </li>
             ))}
+            <li className="masthead__push">{jezyk}</li>
             <li>
-              <a
-                href="#kontakt"
-                className="rounded-md bg-pine-600 px-4 py-2 text-sm font-bold text-white transition hover:bg-pine-500"
-              >
+              <a href="#kontakt" className="masthead__cell masthead__cta">
                 {t.nav.cta}
-              </a>
-            </li>
-            <li>
-              {/* Przelacznik jezyka jest zwyklym linkiem do drugiej trasy —
-                  dziala bez JavaScriptu i jest indeksowany osobno. */}
-              <a
-                href={t.jezyk.drugiHref}
-                hrefLang={t.jezyk.drugiLang}
-                lang={t.jezyk.drugiLang}
-                aria-label={`${t.jezyk.drugi}: ${t.jezyk.etykieta}`}
-                className="rounded-md border border-mist-300 px-3 py-1.5 text-sm font-bold text-ink-700 transition hover:border-pine-500 hover:text-pine-600"
-              >
-                {t.jezyk.drugi}
               </a>
             </li>
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2 md:hidden">
-          <a
-            href={t.jezyk.drugiHref}
-            hrefLang={t.jezyk.drugiLang}
-            lang={t.jezyk.drugiLang}
-            aria-label={`${t.jezyk.drugi}: ${t.jezyk.etykieta}`}
-            className="rounded-md border border-mist-300 px-3 py-2 text-sm font-bold text-ink-700"
-          >
-            {t.jezyk.drugi}
-          </a>
+        <div className="masthead__compact">
+          {jezyk}
           <button
             type="button"
-            className="rounded-md border border-mist-300 px-3 py-2 text-sm font-semibold text-ink-700"
+            className="masthead__cell"
             aria-expanded={otwarte}
             aria-controls="menu-mobilne"
             onClick={() => setOtwarte((v) => !v)}
@@ -95,15 +82,11 @@ export function SiteHeader({ t }: { t: Tresc }) {
       </div>
 
       {otwarte && (
-        <nav id="menu-mobilne" aria-label={t.menu.etykietaMobil} className="border-t border-mist-200 bg-mist-50 md:hidden">
-          <ul className="mx-auto max-w-6xl px-4 py-3 sm:px-6">
+        <nav id="menu-mobilne" aria-label={t.menu.etykietaMobil} className="drawer">
+          <ul>
             {[...linki, { href: '#kontakt', label: t.nav.cta }].map((l) => (
               <li key={l.href}>
-                <a
-                  href={l.href}
-                  onClick={() => setOtwarte(false)}
-                  className="block border-b border-mist-200 py-3 font-semibold text-ink-900 last:border-0"
-                >
+                <a href={l.href} onClick={() => setOtwarte(false)}>
                   {l.label}
                 </a>
               </li>

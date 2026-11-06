@@ -69,6 +69,14 @@ Verified against independent arithmetic: a 2:00 half marathon gives **5:41/km at
 
 ---
 
+## 🎬 Demo
+
+<p align="center">
+  <img src="docs/readme/demo.webp" alt="EzPace: a short scroll through the live site" width="80%">
+</p>
+
+---
+
 ## 🛠️ Technology Stack
 
 ### Frontend

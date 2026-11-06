@@ -1,3 +1,7 @@
+<p align="center">
+  <a href="https://ezpace.dawidolko.pl/"><img src="docs/readme/banner.webp" alt="EzPace: web platform. A plan counted back from the race date, not bolted onto it" width="100%"></a>
+</p>
+
 # EzPace
 
 > 🏃 **A plan counted back from the race date, not bolted onto it** — running coaching with a working pace calculator and a weekly correction loop
@@ -14,7 +18,7 @@ There is no backend and no database. The site is prerendered to files and served
 ![WCAG](https://img.shields.io/badge/WCAG%202.2-AA-16A34A?logo=accessibleicon&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-**Live:** [ezpace.dawidolko.pl](https://ezpace.dawidolko.pl)
+**[Live site](https://ezpace.dawidolko.pl/)** · [Screenshots](#️-screenshots) · [Getting started](#-getting-started)
 
 ---
 
@@ -128,6 +132,8 @@ Morning on the trail: a light, cool ground, deep pine as the lead colour and war
 - Distance selection is a real radio group inside a `<fieldset>` with a `<legend>`, operable from the keyboard.
 - `prefers-reduced-motion` honoured across every transition.
 
+An accessibility panel in the corner of every page changes text size, contrast, font and motion, and remembers the choice on the device. It sits on top of the markup and does not replace accessible markup.
+
 ---
 
 ## 📁 Project Structure
@@ -150,3 +156,11 @@ src/
 ## 📄 License
 
 MIT — see [LICENSE](LICENSE).
+
+---
+
+## 👨‍💻 Author
+
+**Dawid Olko** · Fullstack / AI Developer
+
+[Portfolio](https://olkodawid.dawidolko.pl) · [CV](https://cv.dawidolko.pl) · [LinkedIn](https://www.linkedin.com/in/dawidolko/) · [GitHub](https://github.com/dawidolko)

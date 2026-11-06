@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import '../globals.css';
+import { fontVariables } from '../fonts';
+import { CONTENT_SECURITY_POLICY } from '../csp';
 import { TRESC } from '@/components/tresc';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 
 const t = TRESC['pl'];
+
+const OG_ALT = 'EzPace: plany biegowe liczone wstecz od dnia startu';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ezpace.dawidolko.pl'),
@@ -21,12 +25,11 @@ export const metadata: Metadata = {
     siteName: 'EzPace',
     title: 'EzPace — plany biegowe i kalkulator tempa',
     description: 'Plany biegowe pisane pod jeden cel i jeden kalendarz. Kalkulator tempa, strefy tetna i cotygodniowa korekta planu przez trenera.',
+    images: [{ url: 'https://ezpace.dawidolko.pl/og-image.png', width: 1200, height: 630, alt: OG_ALT }],
   },
-  twitter: { card: 'summary_large_image', title: 'EzPace — plany biegowe i kalkulator tempa', description: 'Plany biegowe pisane pod jeden cel i jeden kalendarz. Kalkulator tempa, strefy tetna i cotygodniowa korekta planu przez trenera.' },
+  twitter: { card: 'summary_large_image', title: 'EzPace — plany biegowe i kalkulator tempa', description: 'Plany biegowe pisane pod jeden cel i jeden kalendarz. Kalkulator tempa, strefy tetna i cotygodniowa korekta planu przez trenera.', images: ['https://ezpace.dawidolko.pl/og-image.png'] },
   alternates: {
     canonical: 'https://ezpace.dawidolko.pl/pl/',
-    // Obie wersje wskazuja na siebie nawzajem; angielska jest domyslna dla
-    // odwiedzajacych spoza listy jezykow.
     languages: {
       en: 'https://ezpace.dawidolko.pl/',
       pl: 'https://ezpace.dawidolko.pl/pl/',
@@ -34,30 +37,38 @@ export const metadata: Metadata = {
     },
   },
   robots: { index: true, follow: true },
+  referrer: 'strict-origin-when-cross-origin',
 };
 
 const daneStrukturalne = {
   '@context': 'https://schema.org',
-  '@type': 'HealthAndBeautyBusiness',
-  name: 'EzPace',
-  url: 'https://ezpace.dawidolko.pl/pl/',
-  description: 'Plany biegowe pisane pod jeden cel i jeden kalendarz. Kalkulator tempa, strefy tetna i cotygodniowa korekta planu przez trenera.',
-  areaServed: 'PL',
-  inLanguage: 'pl',
-  provider: { '@type': 'Person', name: 'Dawid Olko', url: 'https://dawidolko.pl' },
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      name: 'EzPace',
+      url: 'https://ezpace.dawidolko.pl/pl/',
+      description: 'Plany biegowe pisane pod jeden cel i jeden kalendarz. Kalkulator tempa, strefy tetna i cotygodniowa korekta planu przez trenera.',
+      inLanguage: 'pl',
+      author: { '@type': 'Person', name: 'Dawid Olko', url: 'https://dawidolko.pl' },
+    },
+    {
+      '@type': 'Service',
+      name: 'Trening biegowy',
+      url: 'https://ezpace.dawidolko.pl/pl/',
+      description: 'Plany biegowe pisane pod jeden cel i jeden kalendarz. Kalkulator tempa, strefy tetna i cotygodniowa korekta planu przez trenera.',
+      serviceType: 'Trening biegowy',
+      areaServed: 'PL',
+      provider: { '@type': 'Person', name: 'Dawid Olko', url: 'https://dawidolko.pl' },
+    },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pl">
+    <html lang="pl" className={fontVariables}>
       <head>
+        <meta httpEquiv="Content-Security-Policy" content={CONTENT_SECURITY_POLICY} />
         <script src="/a11y/a11y-panel.js" data-accent="#1d4ed8" defer></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(daneStrukturalne) }}

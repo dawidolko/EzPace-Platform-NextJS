@@ -34,7 +34,7 @@ export function StronaGlowna({ t }: { t: Tresc }) {
               <div key={l.etykieta}>
                 <dt className="text-xs uppercase tracking-wider text-ink-400">{l.etykieta}</dt>
                 <dd className="tabular mt-1 font-display text-3xl font-extrabold text-ink-900">{l.wartosc}</dd>
-                <p className="mt-1 text-sm text-ink-500">{l.opis}</p>
+                <dd className="mt-1 text-sm text-ink-500">{l.opis}</dd>
               </div>
             ))}
           </dl>
@@ -117,7 +117,7 @@ export function StronaGlowna({ t }: { t: Tresc }) {
           <ol className="mt-10 grid gap-6 md:grid-cols-3">
             {t.jak.kroki.map((k, i) => (
               <li key={k.tytul} className="rounded-xl border border-mist-200 p-6">
-                <p className="tabular font-display text-5xl font-extrabold text-pine-100">
+                <p className="tabular font-display text-5xl font-extrabold text-pine-500">
                   {String(i + 1).padStart(2, '0')}
                 </p>
                 <h3 className="mt-3 font-display text-xl font-extrabold text-ink-900">{k.tytul}</h3>

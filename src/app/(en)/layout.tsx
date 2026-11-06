@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import '../globals.css';
+import { fontVariables } from '../fonts';
+import { CONTENT_SECURITY_POLICY } from '../csp';
 import { TRESC } from '@/components/tresc';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 
 const t = TRESC['en'];
+
+const OG_ALT = 'EzPace: running plans counted back from race day';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ezpace.dawidolko.pl'),
@@ -21,12 +25,11 @@ export const metadata: Metadata = {
     siteName: 'EzPace',
     title: 'EzPace — running plans and a pace calculator',
     description: 'Running plans written for one goal and one calendar. Pace calculator, heart-rate zones and a weekly correction from your own data.',
+    images: [{ url: 'https://ezpace.dawidolko.pl/og-image.png', width: 1200, height: 630, alt: OG_ALT }],
   },
-  twitter: { card: 'summary_large_image', title: 'EzPace — running plans and a pace calculator', description: 'Running plans written for one goal and one calendar. Pace calculator, heart-rate zones and a weekly correction from your own data.' },
+  twitter: { card: 'summary_large_image', title: 'EzPace — running plans and a pace calculator', description: 'Running plans written for one goal and one calendar. Pace calculator, heart-rate zones and a weekly correction from your own data.', images: ['https://ezpace.dawidolko.pl/og-image.png'] },
   alternates: {
     canonical: 'https://ezpace.dawidolko.pl/',
-    // Obie wersje wskazuja na siebie nawzajem; angielska jest domyslna dla
-    // odwiedzajacych spoza listy jezykow.
     languages: {
       en: 'https://ezpace.dawidolko.pl/',
       pl: 'https://ezpace.dawidolko.pl/pl/',
@@ -34,30 +37,38 @@ export const metadata: Metadata = {
     },
   },
   robots: { index: true, follow: true },
+  referrer: 'strict-origin-when-cross-origin',
 };
 
 const daneStrukturalne = {
   '@context': 'https://schema.org',
-  '@type': 'HealthAndBeautyBusiness',
-  name: 'EzPace',
-  url: 'https://ezpace.dawidolko.pl/',
-  description: 'Running plans written for one goal and one calendar. Pace calculator, heart-rate zones and a weekly correction from your own data.',
-  areaServed: 'PL',
-  inLanguage: 'en',
-  provider: { '@type': 'Person', name: 'Dawid Olko', url: 'https://dawidolko.pl' },
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      name: 'EzPace',
+      url: 'https://ezpace.dawidolko.pl/',
+      description: 'Running plans written for one goal and one calendar. Pace calculator, heart-rate zones and a weekly correction from your own data.',
+      inLanguage: 'en',
+      author: { '@type': 'Person', name: 'Dawid Olko', url: 'https://dawidolko.pl' },
+    },
+    {
+      '@type': 'Service',
+      name: 'Running coaching',
+      url: 'https://ezpace.dawidolko.pl/',
+      description: 'Running plans written for one goal and one calendar. Pace calculator, heart-rate zones and a weekly correction from your own data.',
+      serviceType: 'Running coaching',
+      areaServed: 'PL',
+      provider: { '@type': 'Person', name: 'Dawid Olko', url: 'https://dawidolko.pl' },
+    },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={fontVariables}>
       <head>
+        <meta httpEquiv="Content-Security-Policy" content={CONTENT_SECURITY_POLICY} />
         <script src="/a11y/a11y-panel.js" data-accent="#1d4ed8" defer></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(daneStrukturalne) }}

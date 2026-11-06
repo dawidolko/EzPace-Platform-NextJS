@@ -19,7 +19,7 @@
   --color-ink-900: #0f151b;
   --color-ink-700: #2c3841;
   --color-ink-500: #566470;
-  --color-ink-400: #75828d;
+  --color-ink-400: #67737e;
 
   --color-pine-700: #0b4837;
   --color-pine-600: #0f5d47;
@@ -30,8 +30,8 @@
   --color-clay-500: #d1643a;
   --color-clay-100: #fbe8e0;
 
-  --font-display: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-body: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: var(--font-archivo), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: var(--font-public-sans), system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
 :root {
